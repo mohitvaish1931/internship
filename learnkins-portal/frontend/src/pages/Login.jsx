@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
-import { Lock, Mail, Shield, AlertCircle } from 'lucide-react';
+import { Lock, Mail, AlertCircle } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 
 const Login = () => {
   const { login, user } = useContext(AuthContext);
@@ -40,6 +41,7 @@ const Login = () => {
     }
     setSubmitting(false);
   };
+
   return (
     <div style={{
       minHeight: '100vh',
@@ -55,24 +57,12 @@ const Login = () => {
       <div style={{ width: '100%', maxWidth: '460px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         
         {/* Portal Branding Header */}
-        <div style={{ textAlign: 'center' }}>
-          <div style={{
-            width: '60px',
-            height: '60px',
-            background: 'linear-gradient(135deg, #6366f1, #f97316)',
-            borderRadius: '16px',
-            margin: '0 auto 16px auto',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 8px 24px rgba(99, 102, 241, 0.4)'
-          }}>
-            <Shield size={32} color="white" />
-          </div>
-          <h1 style={{ fontSize: '32px', fontFamily: 'var(--font-display)', fontWeight: 900, marginBottom: '6px' }}>
-            LearnKins Desk
-          </h1>
-          <p style={{ color: '#94a3b8', fontSize: '15px' }}>Gamified Learning for Young Minds</p>
+        <div style={{ textAlign: 'center', marginBottom: '8px' }}>
+          <img 
+            src={logoImg} 
+            alt="LearnKins Logo" 
+            style={{ maxWidth: '280px', height: 'auto', objectFit: 'contain', margin: '0 auto' }} 
+          />
         </div>
 
         {/* Auth Card */}

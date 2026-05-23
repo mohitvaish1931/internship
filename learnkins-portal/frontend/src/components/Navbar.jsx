@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import { Sun, Moon, LogOut, GraduationCap, ShieldAlert } from 'lucide-react';
+import { Sun, Moon, LogOut, ShieldAlert } from 'lucide-react';
+import logoImg from '../assets/logo.png';
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
@@ -36,42 +37,11 @@ const Navbar = () => {
     }}>
       {/* Brand Logo & Name */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <div style={{
-          width: '38px',
-          height: '38px',
-          background: 'linear-gradient(135deg, #6366f1, #f97316)',
-          borderRadius: '10px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 4px 12px rgba(99, 102, 241, 0.3)'
-        }}>
-          <GraduationCap size={22} color="white" />
-        </div>
-        <div>
-          <span style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: '20px',
-            fontWeight: 800,
-            background: 'linear-gradient(135deg, #6366f1, #f97316)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            letterSpacing: '-0.02em'
-          }}>
-            LearnKins
-          </span>
-          <span style={{
-            fontSize: '11px',
-            fontWeight: 700,
-            display: 'block',
-            color: 'var(--text-secondary-light)',
-            letterSpacing: '0.05em',
-            textTransform: 'uppercase',
-            marginTop: '-2px'
-          }}>
-            Intern Portal
-          </span>
-        </div>
+        <img 
+          src={logoImg} 
+          alt="LearnKins Logo" 
+          style={{ height: '36px', objectFit: 'contain' }} 
+        />
       </div>
 
       {/* User Session Profile & Controls */}
