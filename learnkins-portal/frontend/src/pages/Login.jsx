@@ -40,13 +40,6 @@ const Login = () => {
     }
     setSubmitting(false);
   };
-
-  const autofill = (roleEmail, rolePass) => {
-    setEmail(roleEmail);
-    setPassword(rolePass);
-    setError('');
-  };
-
   return (
     <div style={{
       minHeight: '100vh',
@@ -188,86 +181,6 @@ const Login = () => {
             </button>
           </form>
         </div>
-
-        {/* Seed Credentials Panel Helper (Admin Switcher alternative) */}
-        <div style={{
-          backgroundColor: '#1e293b',
-          border: '1.5px solid #334155',
-          borderRadius: '16px',
-          padding: '20px'
-        }}>
-          <h4 style={{ fontSize: '13px', fontWeight: 700, color: '#f97316', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '12px' }}>
-            ⚡ Developer Testing Seed Profiles
-          </h4>
-          <p style={{ fontSize: '12px', color: '#94a3b8', marginBottom: '15px', lineHeight: '1.5' }}>
-            Click a button below to autofill mock database credentials:
-          </p>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <button
-              onClick={() => autofill('admin@learnkins.com', 'admin123')}
-              style={{
-                width: '100%',
-                padding: '10px 14px',
-                backgroundColor: 'rgba(99, 102, 241, 0.1)',
-                border: '1px solid rgba(99, 102, 241, 0.3)',
-                borderRadius: '10px',
-                color: '#818cf8',
-                fontSize: '12.5px',
-                textAlign: 'left',
-                cursor: 'pointer',
-                fontWeight: 600,
-                display: 'flex',
-                justifyContent: 'space-between'
-              }}
-            >
-              <span>🔑 Admin Console Profile</span>
-              <span style={{ opacity: 0.8 }}>admin@learnkins.com</span>
-            </button>
-            
-            <button
-              onClick={() => autofill('krishna.jangid@gmail.com', 'student123')}
-              style={{
-                width: '100%',
-                padding: '10px 14px',
-                backgroundColor: 'rgba(249, 115, 22, 0.1)',
-                border: '1px solid rgba(249, 115, 22, 0.3)',
-                borderRadius: '10px',
-                color: '#ffedd5',
-                fontSize: '12.5px',
-                textAlign: 'left',
-                cursor: 'pointer',
-                fontWeight: 600,
-                display: 'flex',
-                justifyContent: 'space-between'
-              }}
-            >
-              <span>🎓 Student Profile (AI/ML)</span>
-              <span style={{ opacity: 0.8 }}>krishna.jangid@gmail.com</span>
-            </button>
-
-            <button
-              onClick={() => autofill('lakshya.garg@gmail.com', 'student123')}
-              style={{
-                width: '100%',
-                padding: '10px 14px',
-                backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                border: '1px solid rgba(16, 185, 129, 0.3)',
-                borderRadius: '10px',
-                color: '#a7f3d0',
-                fontSize: '12.5px',
-                textAlign: 'left',
-                cursor: 'pointer',
-                fontWeight: 600,
-                display: 'flex',
-                justifyContent: 'space-between'
-              }}
-            >
-              <span>🎓 Student Profile (ML)</span>
-              <span style={{ opacity: 0.8 }}>lakshya.garg@gmail.com</span>
-            </button>
-          </div>
-        </div>
-
       </div>
       <style>{`
         .login-input:focus {
