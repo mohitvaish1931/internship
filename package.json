@@ -1,0 +1,8 @@
+{
+  "name": "learnkins-portal-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm install --prefix learnkins-portal/frontend && npm run build --prefix learnkins-portal/frontend"
+  }
+}
