@@ -74,7 +74,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Krishna Jangid',
-        email: 'krishna.jangid@gmail.com',
+        email: 'krjangid0123@gmail.com',
         password: 'student123',
         role: 'student',
         batch: batchAiMl._id,
@@ -82,7 +82,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Naina Dayal',
-        email: 'naina.dayal@gmail.com',
+        email: 'nainadhayal002@gmail.com',
         password: 'student123',
         role: 'student',
         batch: batchAiMl._id,
@@ -90,7 +90,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Jainab Bee',
-        email: 'jainab.bee@gmail.com',
+        email: 'jainabbee94@gmail.com',
         password: 'student123',
         role: 'student',
         batch: batchAiMl._id,
@@ -98,7 +98,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Heeral',
-        email: 'heeral@gmail.com',
+        email: 'heeralpurbia31@gmail.com',
         password: 'student123',
         role: 'student',
         batch: batchAiMl._id,
@@ -106,7 +106,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Lakshya Garg',
-        email: 'lakshya.garg@gmail.com',
+        email: 'lakshya0858@gmail.com',
         password: 'student123',
         role: 'student',
         batch: batchMl._id,
@@ -114,7 +114,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Navya Mangal',
-        email: 'navya.mangal@gmail.com',
+        email: 'navyamangal5@gmail.com',
         password: 'student123',
         role: 'student',
         batch: batchAiMl._id,
@@ -122,7 +122,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Aishna Kachhawah',
-        email: 'aishna.kachhawah@gmail.com',
+        email: 'aishnasingh2005@gmail.com',
         password: 'student123',
         role: 'student',
         batch: batchAiMl._id,
@@ -130,7 +130,7 @@ const seedDatabase = async () => {
       },
       {
         name: 'Krishna Samnotra',
-        email: 'krishna.samnotra@gmail.com',
+        email: 'samnotrakrishna2006@gmail.com',
         password: 'student123',
         role: 'student',
         batch: batchDs._id,
@@ -138,7 +138,23 @@ const seedDatabase = async () => {
       },
       {
         name: 'Nagesh Bairwa',
-        email: 'nagesh.bairwa@gmail.com',
+        email: 'nageshkbairwa7231@gmail.com',
+        password: 'student123',
+        role: 'student',
+        batch: batchAiMl._id,
+        active: true
+      },
+      {
+        name: 'Narendra Kharwal',
+        email: 'narendrakharwal2004@gmail.com',
+        password: 'student123',
+        role: 'student',
+        batch: batchAiMl._id,
+        active: true
+      },
+      {
+        name: 'Priyanka',
+        email: 'priyanka2812008@gmail.com',
         password: 'student123',
         role: 'student',
         batch: batchAiMl._id,
@@ -161,15 +177,17 @@ const seedDatabase = async () => {
     console.log('Admin Console Account:');
     console.log('  email: admin@learnkins.com | password: admin123');
     console.log('Student Accounts (Password is "student123" for all):');
-    console.log('  1. Krishna Jangid: krishna.jangid@gmail.com (AI/ML)');
-    console.log('  2. Naina Dayal: naina.dayal@gmail.com (AI/ML)');
-    console.log('  3. Jainab Bee: jainab.bee@gmail.com (AI/ML)');
-    console.log('  4. Heeral: heeral@gmail.com (AI/ML)');
-    console.log('  5. Lakshya Garg: lakshya.garg@gmail.com (ML)');
-    console.log('  6. Navya Mangal: navya.mangal@gmail.com (AI/ML)');
-    console.log('  7. Aishna Kachhawah: aishna.kachhawah@gmail.com (AI/ML)');
-    console.log('  8. Krishna Samnotra: krishna.samnotra@gmail.com (DS)');
-    console.log('  9. Nagesh Bairwa: nagesh.bairwa@gmail.com (AI/ML)');
+    console.log('  1. Krishna Jangid: krjangid0123@gmail.com (AI/ML)');
+    console.log('  2. Naina Dayal: nainadhayal002@gmail.com (AI/ML)');
+    console.log('  3. Jainab Bee: jainabbee94@gmail.com (AI/ML)');
+    console.log('  4. Heeral: heeralpurbia31@gmail.com (AI/ML)');
+    console.log('  5. Lakshya Garg: lakshya0858@gmail.com (ML)');
+    console.log('  6. Navya Mangal: navyamangal5@gmail.com (AI/ML)');
+    console.log('  7. Aishna Kachhawah: aishnasingh2005@gmail.com (AI/ML)');
+    console.log('  8. Krishna Samnotra: samnotrakrishna2006@gmail.com (DS)');
+    console.log('  9. Nagesh Bairwa: nageshkbairwa7231@gmail.com (AI/ML)');
+    console.log('  10. Narendra Kharwal: narendrakharwal2004@gmail.com (AI/ML)');
+    console.log('  11. Priyanka: priyanka2812008@gmail.com (AI/ML)');
     console.log('------------------------------------------------------------\n');
 
     await mongoose.disconnect();
