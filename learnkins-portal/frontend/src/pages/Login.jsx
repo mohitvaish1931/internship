@@ -225,7 +225,7 @@ const Login = () => {
             </button>
             
             <button
-              onClick={() => autofill('student1@learnkins.com', 'student123')}
+              onClick={() => autofill('krishna.jangid@gmail.com', 'student123')}
               style={{
                 width: '100%',
                 padding: '10px 14px',
@@ -241,12 +241,12 @@ const Login = () => {
                 justifyContent: 'space-between'
               }}
             >
-              <span>🎓 Student Profile (Batch Alpha)</span>
-              <span style={{ opacity: 0.8 }}>student1@learnkins.com</span>
+              <span>🎓 Student Profile (AI/ML)</span>
+              <span style={{ opacity: 0.8 }}>krishna.jangid@gmail.com</span>
             </button>
 
             <button
-              onClick={() => autofill('student3@learnkins.com', 'student123')}
+              onClick={() => autofill('lakshya.garg@gmail.com', 'student123')}
               style={{
                 width: '100%',
                 padding: '10px 14px',
@@ -262,8 +262,8 @@ const Login = () => {
                 justifyContent: 'space-between'
               }}
             >
-              <span>🎓 Student Profile (Batch Beta)</span>
-              <span style={{ opacity: 0.8 }}>student3@learnkins.com</span>
+              <span>🎓 Student Profile (ML)</span>
+              <span style={{ opacity: 0.8 }}>lakshya.garg@gmail.com</span>
             </button>
           </div>
         </div>

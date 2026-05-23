@@ -18,169 +18,222 @@ const seedDatabase = async () => {
     await mongoose.connect(MONGODB_URI);
     console.log('✅ Connected to MongoDB.');
 
-    // 1. Clean existing database to purge old duplicate indexes
+    // 1. Clean existing database to purge old indexes
     console.log('🧹 Dropping existing database to rebuild clean collection indexes...');
     await mongoose.connection.db.dropDatabase();
     console.log('🧹 Database drop completed.');
 
-    // 2. Create Batches
-    console.log('🌱 Seeding batches...');
+    // 2. Create the exact 4 Domain Batches
+    console.log('🌱 Seeding specific domain cohorts...');
     const batches = await Batch.insertMany([
       {
-        name: 'Batch Alpha (Full Stack Web Dev)',
+        name: 'AI/ML',
         startDate: new Date('2026-05-01'),
         endDate: new Date('2026-08-01'),
         active: true
       },
       {
-        name: 'Batch Beta (Data Science & AI)',
-        startDate: new Date('2026-05-15'),
-        endDate: new Date('2026-08-15'),
+        name: 'ML',
+        startDate: new Date('2026-05-01'),
+        endDate: new Date('2026-08-01'),
         active: true
       },
       {
-        name: 'Batch Gamma (UI/UX Product Design)',
-        startDate: new Date('2026-06-01'),
-        endDate: new Date('2026-09-01'),
+        name: 'Full Stack',
+        startDate: new Date('2026-05-01'),
+        endDate: new Date('2026-08-01'),
+        active: true
+      },
+      {
+        name: 'DS',
+        startDate: new Date('2026-05-01'),
+        endDate: new Date('2026-08-01'),
         active: true
       }
     ]);
-    console.log(`✅ ${batches.length} Batches seeded.`);
+    console.log(`✅ ${batches.length} Cohort domains seeded.`);
 
-    const batchAlphaId = batches[0]._id;
-    const batchBetaId = batches[1]._id;
-    const batchGammaId = batches[2]._id;
+    // Map Batch references
+    const batchAiMl = batches[0];
+    const batchMl = batches[1];
+    const batchFullStack = batches[2];
+    const batchDs = batches[3];
 
-    // 3. Create Users (Admin & Students)
-    console.log('🌱 Seeding users...');
-    const users = await User.insertMany([
+    // 3. Create Administrator and the 9 Real Students
+    console.log('🌱 Seeding real student accounts with Gmail credentials...');
+    
+    // We'll generate simple passwords like "student123" for students and keep "admin123" for admin
+    const studentsData = [
       {
         name: 'Admin LearnKins',
         email: 'admin@learnkins.com',
-        password: 'admin123', // Simple plaintext password
+        password: 'admin123',
         role: 'admin',
         batch: null,
         active: true
       },
       {
-        name: 'Aarav Sharma',
-        email: 'student1@learnkins.com',
+        name: 'Krishna Jangid',
+        email: 'krishna.jangid@gmail.com',
         password: 'student123',
         role: 'student',
-        batch: batchAlphaId,
+        batch: batchAiMl._id,
         active: true
       },
       {
-        name: 'Ananya Iyer',
-        email: 'student2@learnkins.com',
+        name: 'Naina Dayal',
+        email: 'naina.dayal@gmail.com',
         password: 'student123',
         role: 'student',
-        batch: batchAlphaId,
+        batch: batchAiMl._id,
         active: true
       },
       {
-        name: 'Ishaan Verma',
-        email: 'student3@learnkins.com',
+        name: 'Jainab Bee',
+        email: 'jainab.bee@gmail.com',
         password: 'student123',
         role: 'student',
-        batch: batchBetaId,
+        batch: batchAiMl._id,
         active: true
       },
       {
-        name: 'Riya Sen',
-        email: 'student4@learnkins.com',
+        name: 'Heeral',
+        email: 'heeral@gmail.com',
         password: 'student123',
         role: 'student',
-        batch: batchGammaId,
-        active: false // Inactive user for testing deactivation
+        batch: batchAiMl._id,
+        active: true
+      },
+      {
+        name: 'Lakshya Garg',
+        email: 'lakshya.garg@gmail.com',
+        password: 'student123',
+        role: 'student',
+        batch: batchMl._id,
+        active: true
+      },
+      {
+        name: 'Navya Mangal',
+        email: 'navya.mangal@gmail.com',
+        password: 'student123',
+        role: 'student',
+        batch: batchAiMl._id,
+        active: true
+      },
+      {
+        name: 'Aishna Kachhawah',
+        email: 'aishna.kachhawah@gmail.com',
+        password: 'student123',
+        role: 'student',
+        batch: batchAiMl._id,
+        active: true
+      },
+      {
+        name: 'Krishna Samnotra',
+        email: 'krishna.samnotra@gmail.com',
+        password: 'student123',
+        role: 'student',
+        batch: batchDs._id,
+        active: true
+      },
+      {
+        name: 'Nagesh Bairwa',
+        email: 'nagesh.bairwa@gmail.com',
+        password: 'student123',
+        role: 'student',
+        batch: batchAiMl._id,
+        active: true
       }
-    ]);
-    console.log(`✅ ${users.length} Users seeded.`);
+    ];
+
+    const users = await User.insertMany(studentsData);
+    console.log(`✅ ${users.length - 1} Students and 1 Admin seeded successfully.`);
 
     const adminUser = users[0];
-    const student1 = users[1];
-    const student2 = users[2];
-    const student3 = users[3];
+    const s1 = users[1]; // Krishna Jangid
+    const s2 = users[2]; // Naina Dayal
+    const s5 = users[5]; // Lakshya Garg
+    const s8 = users[8]; // Krishna Samnotra
 
-    // 4. Create Videos
-    console.log('🌱 Seeding videos...');
+    // 4. Create Curated Videos structured for the new Cohorts
+    console.log('🌱 Seeding learning video lessons for new domains...');
     const videos = await Video.insertMany([
       {
         title: 'Introduction to Full Stack Architecture',
         description: 'Understand the flow between client browser, web server, and database.',
         cloudinaryUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
-        thumbnail: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&auto=format&fit=crop&q=60',
+        thumbnail: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400',
         day: 1,
         module: 'Getting Started',
-        batch: [batchAlphaId, batchBetaId],
+        batch: [batchFullStack._id],
         order: 1,
         duration: 120
       },
       {
-        title: 'Mastering Advanced Responsive Grids',
-        description: 'Learn Flexbox, CSS Grid layouts, and mobile-first responsive media queries.',
+        title: 'Deep Learning & Neural Networks Foundations',
+        description: 'Mathematical intuition behind Artificial Neural Networks and Backpropagation.',
         cloudinaryUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-        thumbnail: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=400&auto=format&fit=crop&q=60',
-        day: 2,
-        module: 'CSS Mastery',
-        batch: [batchAlphaId, batchGammaId],
-        order: 2,
+        thumbnail: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=400',
+        day: 1,
+        module: 'AI Foundations',
+        batch: [batchAiMl._id, batchMl._id],
+        order: 1,
         duration: 180
       },
       {
-        title: 'Python Pandas & NumPy Foundations',
-        description: 'Hands-on look at vector calculations and tabular data manipulation.',
+        title: 'Data Wrangling with Pandas & Numpy',
+        description: 'Master vector calculation and array slicing for structural data.',
         cloudinaryUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-        thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&auto=format&fit=crop&q=60',
+        thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400',
         day: 1,
         module: 'Data Pipelines',
-        batch: [batchBetaId],
-        order: 1,
+        batch: [batchAiMl._id, batchMl._id, batchDs._id],
+        order: 2,
         duration: 150
       },
       {
         title: 'Supervised Learning Regression Models',
-        description: 'Mathematical intuition behind Cost Functions, Gradient Descent, and Linear Regression.',
+        description: 'Learn Cost Functions, Gradient Descent, and Linear Regression implementations.',
         cloudinaryUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-        thumbnail: 'https://images.unsplash.com/photo-1527474305487-b87b222841cc?w=400&auto=format&fit=crop&q=60',
+        thumbnail: 'https://images.unsplash.com/photo-1527474305487-b87b222841cc?w=400',
         day: 2,
         module: 'Machine Learning',
-        batch: [batchBetaId],
-        order: 2,
+        batch: [batchMl._id, batchAiMl._id],
+        order: 3,
         duration: 210
       },
       {
-        title: 'Figma Auto Layout and Component Systems',
-        description: 'Speed up product designs using dynamic auto layouts and nested component hierarchies.',
+        title: 'Exploratory Data Analysis (EDA) Best Practices',
+        description: 'Understand data distributions, anomaly identification, and Matplotlib plotting.',
         cloudinaryUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4',
-        thumbnail: 'https://images.unsplash.com/photo-1561070791-26c113006238?w=400&auto=format&fit=crop&q=60',
+        thumbnail: 'https://images.unsplash.com/photo-1561070791-26c113006238?w=400',
         day: 1,
-        module: 'Interface Engineering',
-        batch: [batchGammaId],
+        module: 'Data Engineering',
+        batch: [batchDs._id],
         order: 1,
         duration: 320
       }
     ]);
-    console.log(`✅ ${videos.length} Videos seeded.`);
+    console.log(`✅ ${videos.length} Videos assigned.`);
 
-    // 5. Create Resources
-    console.log('🌱 Seeding resources...');
-    const resources = await Resource.insertMany([
+    // 5. Create Curated Resources targeting the new Cohorts
+    console.log('🌱 Seeding curated documentation resources...');
+    await Resource.insertMany([
       {
-        title: 'MDN Web Docs - HTML Reference',
-        url: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
+        title: 'TensorFlow Official Quickstart Guide',
+        url: 'https://www.tensorflow.org/tutorials/quickstart/beginner',
         type: 'doc',
-        category: 'HTML & CSS',
+        category: 'Deep Learning',
         pinned: true,
-        batch: [batchAlphaId, batchGammaId]
+        batch: [batchAiMl._id, batchMl._id]
       },
       {
-        title: 'CSS Tricks Complete Guide to Grid',
-        url: 'https://css-tricks.com/snippets/css/complete-guide-grid/',
-        type: 'article',
-        category: 'Styling',
+        title: 'Scikit-Learn Regression Documentation',
+        url: 'https://scikit-learn.org/stable/supervised_learning.html',
+        type: 'doc',
+        category: 'ML Math',
         pinned: false,
-        batch: [batchAlphaId, batchGammaId]
+        batch: [batchAiMl._id, batchMl._id]
       },
       {
         title: 'Pandas Data Wrangling Cheatsheet',
@@ -188,91 +241,99 @@ const seedDatabase = async () => {
         type: 'tool',
         category: 'Data Science',
         pinned: true,
-        batch: [batchBetaId]
+        batch: [batchDs._id, batchAiMl._id]
       },
       {
-        title: 'Kaggle Machine Learning Playground',
-        url: 'https://www.kaggle.com',
-        type: 'repo',
-        category: 'Competitions',
-        pinned: false,
-        batch: [batchBetaId]
-      },
-      {
-        title: 'React Dev docs - Quick Start Guide',
-        url: 'https://react.dev/learn',
+        title: 'MDN Full Stack Web Roadmap',
+        url: 'https://developer.mozilla.org/en-US/docs/Learn',
         type: 'doc',
-        category: 'React',
+        category: 'HTML & CSS',
         pinned: true,
-        batch: [batchAlphaId]
+        batch: [batchFullStack._id]
       }
     ]);
-    console.log(`✅ ${resources.length} Resources seeded.`);
+    console.log('✅ Curated resource links seeded.');
 
-    // 6. Seed Progress Records (to showcase analytics instantly)
-    console.log('🌱 Seeding initial progress records...');
+    // 6. Seed mock Progress logs
+    console.log('🌱 Seeding initial progress logs...');
     await Progress.insertMany([
       {
-        student: student1._id,
-        video: videos[0]._id, // Intro Full Stack
+        student: s1._id, // Krishna Jangid
+        video: videos[1]._id, // Deep Learning
         watchedPercent: 85,
         completed: false,
-        lastWatched: new Date('2026-05-22')
+        lastWatched: new Date('2026-05-23')
       },
       {
-        student: student1._id,
-        video: videos[1]._id, // Responsive grids
+        student: s1._id, // Krishna Jangid
+        video: videos[2]._id, // Pandas Wrangling
+        watchedPercent: 100,
+        completed: true,
+        lastWatched: new Date('2026-05-24')
+      },
+      {
+        student: s2._id, // Naina Dayal
+        video: videos[1]._id, // Deep Learning
         watchedPercent: 100,
         completed: true,
         lastWatched: new Date('2026-05-23')
       },
       {
-        student: student2._id,
-        video: videos[0]._id, // Intro Full Stack
-        watchedPercent: 100,
-        completed: true,
-        lastWatched: new Date('2026-05-22')
-      },
-      {
-        student: student3._id,
-        video: videos[2]._id, // Pandas Foundations
-        watchedPercent: 50,
+        student: s5._id, // Lakshya Garg
+        video: videos[3]._id, // Supervised Learning
+        watchedPercent: 60,
         completed: false,
-        lastWatched: new Date('2026-05-23')
+        lastWatched: new Date('2026-05-24')
+      },
+      {
+        student: s8._id, // Krishna Samnotra
+        video: videos[4]._id, // EDA Best Practices
+        watchedPercent: 100,
+        completed: true,
+        lastWatched: new Date('2026-05-24')
       }
     ]);
-    console.log('✅ Progress records seeded.');
+    console.log('✅ Student watch progress records seeded.');
 
-    // 7. Seed Notice Board Announcements
+    // 7. Seed announcements
     console.log('🌱 Seeding notices...');
     await Announcement.insertMany([
       {
-        title: 'Welcome to the Summer 2026 Internship Portal!',
-        content: 'Greetings Interns! Use this portal to watch your daily curated videos, access target resources, and monitor your personal completion analytics.',
+        title: 'Welcome to the Live LearnKins Student Desk!',
+        content: 'Greetings Interns! Use this portal to watch daily curated video courses, refer to domain links, and track your gamified progress.',
         pinned: true,
         createdBy: adminUser._id
       },
       {
-        title: 'First Weekly Progress Evaluation on Friday',
-        content: 'Reminder to all batches: Make sure you complete your assigned video modules for Week 1 before Friday 6 PM. Pinned resources are excellent references for your study.',
+        title: 'First Weekly Progress Review on Friday',
+        content: 'Reminder to all domain tracks (AI/ML, ML, DS, Full Stack): Make sure you complete your assigned video modules for Week 1 before Friday.',
         pinned: false,
         createdBy: adminUser._id
       }
     ]);
-    console.log('✅ Announcements notice board seeded.');
+    console.log('✅ Notice board notices seeded.');
 
-    console.log('\n🌟 Database successfully loaded with LearnKins seed data!');
+    console.log('\n🌟 Real cohort databases successfully populated!');
     console.log('------------------------------------------------------------');
-    console.log(`Admin Portal: email: admin@learnkins.com | password: admin123`);
-    console.log(`Student Portal (Alpha): email: student1@learnkins.com | password: student123`);
-    console.log(`Student Portal (Beta): email: student3@learnkins.com | password: student123`);
+    console.log('Admin Console Account:');
+    console.log('  email: admin@learnkins.com | password: admin123');
+    console.log('Student Accounts (Password is "student123" for all):');
+    console.log('  1. Krishna Jangid: krishna.jangid@gmail.com (AI/ML)');
+    console.log('  2. Naina Dayal: naina.dayal@gmail.com (AI/ML)');
+    console.log('  3. Jainab Bee: jainab.bee@gmail.com (AI/ML)');
+    console.log('  4. Heeral: heeral@gmail.com (AI/ML)');
+    console.log('  5. Lakshya Garg: lakshya.garg@gmail.com (ML)');
+    console.log('  6. Navya Mangal: navya.mangal@gmail.com (AI/ML)');
+    console.log('  7. Aishna Kachhawah: aishna.kachhawah@gmail.com (AI/ML)');
+    console.log('  8. Krishna Samnotra: krishna.samnotra@gmail.com (DS)');
+    console.log('  9. Nagesh Bairwa: nagesh.bairwa@gmail.com (AI/ML)');
     console.log('------------------------------------------------------------\n');
 
     await mongoose.disconnect();
     console.log('🔌 Disconnected from MongoDB.');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Seeding process encountered a fatal error:', error);
+    console.error('❌ Seeding failed with fatal error:', error);
     process.exit(1);
   }
 };
