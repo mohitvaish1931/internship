@@ -230,7 +230,11 @@ export const updateProgress = async (req, res) => {
       return res.status(404).json({ message: 'Target video not found.' });
     }
 
-    const numericPercent = Math.min(100, Math.max(0, Number(watchedPercent)));
+    let numericPercent = Number(watchedPercent);
+    if (isNaN(numericPercent)) {
+      numericPercent = 0;
+    }
+    numericPercent = Math.min(100, Math.max(0, numericPercent));
     
     // Automatically flag completed if watched percentage crosses 90%
     const isCompleted = numericPercent >= 90;

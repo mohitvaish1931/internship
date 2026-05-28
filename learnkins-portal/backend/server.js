@@ -20,19 +20,18 @@ import announcementRoutes from './routes/announcements.js';
 import { updateProgress } from './controllers/videoController.js';
 import { requireAuth } from './middleware/auth.js';
 
-dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 5000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/learnkins';
-
-// Middlewares
-app.use(cors());
-app.use(express.json());
-
 // Set up static files paths
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.resolve(__dirname, '.env') });
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+const PORT = process.env.PORT || 5000;
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/learnkins';
+
 
 // Ensure local uploads directory exists
 const uploadsPath = path.join(__dirname, 'uploads');

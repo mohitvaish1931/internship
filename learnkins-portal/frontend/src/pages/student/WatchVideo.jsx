@@ -175,7 +175,11 @@ const WatchVideo = () => {
               onDuration={handleDuration}
               onProgress={handleProgress}
               onEnded={handleEnded}
-              onPause={() => syncProgress((playedSeconds / totalDuration) * 100)}
+              onPause={() => {
+                if (totalDuration > 0) {
+                  syncProgress((playedSeconds / totalDuration) * 100);
+                }
+              }}
               style={{ position: 'absolute', top: 0, left: 0 }}
             />
           </div>
